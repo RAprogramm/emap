@@ -121,7 +121,10 @@ impl<V: Clone> Map<V> {
     #[inline]
     pub fn init_with_some(&mut self, cap: usize, v: V) {
         let capacity = self.capacity();
-        assert!(cap <= capacity, "initialization bound {cap} exceeds capacity {capacity}",);
+        assert!(
+            cap <= capacity,
+            "initialization bound {cap} exceeds capacity {capacity}",
+        );
         let mut previous_used = NodeId::new(NodeId::UNDEF);
         self.first_free = NodeId::new(NodeId::UNDEF);
         self.first_used = NodeId::new(NodeId::UNDEF);
@@ -358,7 +361,11 @@ mod tests {
     impl PanicOnClone {
         fn new(panic_after: usize, clones: Rc<Cell<usize>>, active: Rc<Cell<usize>>) -> Self {
             active.set(active.get() + 1);
-            Self { clones, active, panic_after }
+            Self {
+                clones,
+                active,
+                panic_after,
+            }
         }
     }
 
